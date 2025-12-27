@@ -3,300 +3,371 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Graphic Design 1 - Mr. Burke</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Graphic Design 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #1e3a8a 50%, #1e293b 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .hidden { display: none !important; }
+    
+    /* Welcome Screen */
+    #welcome { text-align: center; max-width: 600px; margin: 0 auto; padding-top: 4rem; }
+    h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+    .subtitle { font-size: 1.8rem; color: #93c5fd; margin-bottom: 0.5rem; }
+    .tagline { font-size: 1.2rem; color: #94a3b8; margin-bottom: 3rem; }
+    
+    .welcome-box {
+      background: #1e293b;
+      border: 2px solid #3b82f6;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .welcome-box h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+    input {
+      width: 100%;
+      padding: 1rem;
+      background: #0f172a;
+      border: 2px solid #475569;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    input:focus { outline: none; border-color: #3b82f6; }
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #3b82f6;
+      border: none;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: #2563eb; }
+    
+    /* Main Content */
+    .back-btn {
+      width: auto;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .week-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .week-desc { font-size: 1.3rem; color: #93c5fd; margin-bottom: 2rem; }
+    
+    /* Day Buttons */
+    .day-buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .day-btn {
+      width: auto;
+      padding: 0.75rem 1.5rem;
+      background: #1e293b;
+      border: 2px solid #475569;
+    }
+    .day-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+    }
+    
+    /* Content Cards */
+    .card {
+      background: #1e293b;
+      border: 2px solid #475569;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .card h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .card-subtitle { font-size: 1.2rem; color: #93c5fd; margin-bottom: 1rem; }
+    .brief-box {
+      background: rgba(59, 130, 246, 0.1);
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .brief-label { color: #93c5fd; font-weight: bold; margin-bottom: 0.5rem; }
+    
+    .objectives li, .topics li {
+      margin-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+    
+    .bell-ringer {
+      background: rgba(234, 179, 8, 0.1);
+      border-left: 4px solid #eab308;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+    
+    .activity {
+      background: linear-gradient(135deg, rgba(22, 101, 52, 0.2), rgba(30, 58, 138, 0.2));
+      border: 2px solid rgba(34, 197, 94, 0.3);
+    }
+    
+    .exit-ticket {
+      background: rgba(220, 38, 38, 0.1);
+      border: 2px solid rgba(220, 38, 38, 0.3);
+    }
+    
+    .time { 
+      float: right; 
+      font-size: 0.9rem; 
+      color: #94a3b8; 
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white min-h-screen">
-  
-  <div id="app" class="container mx-auto px-6 py-12">
-    <!-- Welcome Screen -->
-    <div id="welcome-screen" class="max-w-4xl mx-auto text-center">
-      <h1 class="text-6xl font-bold mb-4">Graphic Design 1</h1>
-      <p class="text-3xl text-blue-300 mb-2">Mr. Burke's Design Studio</p>
-      <p class="text-xl text-slate-400 mb-12">18-Week Journey into Visual Communication</p>
-      
-      <div class="bg-slate-800 rounded-xl p-8 border border-blue-500/30 max-w-md mx-auto">
-        <h2 class="text-2xl font-bold mb-4">Welcome! What's your name?</h2>
-        <input 
-          type="text" 
-          id="student-name" 
-          placeholder="Enter your name"
-          class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:border-blue-500 text-white text-lg"
-        />
-        <button 
-          onclick="startLearning()"
-          class="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-lg font-bold text-lg transition"
-        >
-          Start Learning
-        </button>
-      </div>
-    </div>
+<body>
 
-    <!-- Main Content (hidden initially) -->
-    <div id="main-content" class="hidden">
-      <div class="mb-8">
-        <button onclick="showWelcome()" class="text-blue-300 hover:text-blue-200 mb-4">← Back to Home</button>
-        <h1 class="text-5xl font-bold mb-2">Week 1: Foundations, Tools, and Visual Thinking</h1>
-        <p class="text-2xl text-blue-300">What graphic design is and how designers think</p>
-      </div>
-
-      <!-- Day Selector -->
-      <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
-        <button onclick="showDay('monday')" id="btn-monday" class="day-btn px-6 py-3 bg-blue-600 rounded-lg font-semibold">Monday</button>
-        <button onclick="showDay('tuesday')" id="btn-tuesday" class="day-btn px-6 py-3 bg-slate-800 rounded-lg font-semibold">Tuesday</button>
-        <button onclick="showDay('wednesday')" id="btn-wednesday" class="day-btn px-6 py-3 bg-slate-800 rounded-lg font-semibold">Wednesday</button>
-        <button onclick="showDay('thursday')" id="btn-thursday" class="day-btn px-6 py-3 bg-slate-800 rounded-lg font-semibold">Thursday</button>
-        <button onclick="showDay('friday')" id="btn-friday" class="day-btn px-6 py-3 bg-slate-800 rounded-lg font-semibold">Friday</button>
-      </div>
-
-      <!-- Monday Content -->
-      <div id="day-monday" class="day-content max-w-4xl">
-        <div class="bg-slate-800 rounded-xl p-8 mb-6 border border-blue-500/30">
-          <h2 class="text-3xl font-bold mb-2">Welcome & What Is Graphic Design?</h2>
-          <p class="text-xl text-blue-300 mb-4">Introduction to Visual Communication</p>
-          <div class="bg-blue-900/30 rounded-lg p-4 border border-blue-500/30">
-            <p class="font-semibold text-blue-300 mb-2">Today's Brief:</p>
-            <p class="text-lg">Today you'll learn what graphic design is and why it matters. You'll look at everyday designs, discuss what they communicate, and start thinking like a designer.</p>
-          </div>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <h3 class="text-xl font-bold mb-4 text-blue-300">Learning Objectives</h3>
-          <ul class="space-y-2">
-            <li>• Define graphic design in practical terms</li>
-            <li>• Identify design in everyday life</li>
-            <li>• Practice respectful discussion and critique</li>
-          </ul>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-yellow-300">Bell Ringer</h3>
-            <span class="text-sm text-slate-400">5 min</span>
-          </div>
-          <p class="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 text-lg">
-            Write down three designs you saw this morning. What were they trying to do?
-          </p>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-purple-300">Mini Lesson</h3>
-            <span class="text-sm text-slate-400">15 min</span>
-          </div>
-          <ul class="space-y-2">
-            <li>• What graphic design is (and isn't)</li>
-            <li>• Design as communication and problem-solving</li>
-            <li>• Examples: posters, apps, packaging, signage</li>
-          </ul>
-        </div>
-
-        <div class="bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-xl p-6 mb-6 border border-green-500/30">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-green-300">Activity: Design Spotting</h3>
-            <span class="text-sm text-slate-400">20 min</span>
-          </div>
-          <p class="text-lg">Students list or sketch examples from the room or memory. Small-group discussion: purpose, audience, effectiveness.</p>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
-          <h3 class="text-xl font-bold text-red-300 mb-2">Exit Ticket</h3>
-          <p class="text-lg">In one sentence, explain what graphic design does.</p>
-        </div>
-      </div>
-
-      <!-- Tuesday Content -->
-      <div id="day-tuesday" class="day-content hidden max-w-4xl">
-        <div class="bg-slate-800 rounded-xl p-8 mb-6 border border-blue-500/30">
-          <h2 class="text-3xl font-bold mb-2">Visual Language & Observation</h2>
-          <p class="text-xl text-blue-300 mb-4">Training Your Designer's Eye</p>
-          <div class="bg-blue-900/30 rounded-lg p-4 border border-blue-500/30">
-            <p class="font-semibold text-blue-300 mb-2">Today's Brief:</p>
-            <p class="text-lg">Designers notice details. Today you'll train your eye to observe shapes, spacing, and relationships.</p>
-          </div>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-yellow-300">Bell Ringer</h3>
-            <span class="text-sm text-slate-400">5 min</span>
-          </div>
-          <p class="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 text-lg">
-            Look at one object near you. List five visual details without naming the object.
-          </p>
-        </div>
-
-        <div class="bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-xl p-6 mb-6 border border-green-500/30">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-green-300">Activity: Blind Contour + Object Study</h3>
-            <span class="text-sm text-slate-400">25 min</span>
-          </div>
-          <p class="text-lg">Blind contour drawing (no looking at paper). Second drawing with careful observation. Brief comparison and discussion.</p>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
-          <h3 class="text-xl font-bold text-red-300 mb-2">Exit Ticket</h3>
-          <p class="text-lg">One thing you noticed today that you usually ignore.</p>
-        </div>
-      </div>
-
-      <!-- Wednesday Content -->
-      <div id="day-wednesday" class="day-content hidden max-w-4xl">
-        <div class="bg-slate-800 rounded-xl p-8 mb-6 border border-blue-500/30">
-          <h2 class="text-3xl font-bold mb-2">Composition Basics</h2>
-          <p class="text-xl text-blue-300 mb-4">How Arrangement Creates Meaning</p>
-          <div class="bg-blue-900/30 rounded-lg p-4 border border-blue-500/30">
-            <p class="font-semibold text-blue-300 mb-2">Today's Brief:</p>
-            <p class="text-lg">How things are arranged matters. Today you'll learn simple rules that help designs feel clear and intentional.</p>
-          </div>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-yellow-300">Bell Ringer</h3>
-            <span class="text-sm text-slate-400">5 min</span>
-          </div>
-          <p class="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 text-lg">
-            Which is easier to read: a messy page or an organized one? Why?
-          </p>
-        </div>
-
-        <div class="bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-xl p-6 mb-6 border border-green-500/30">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-green-300">Activity: Cut-and-Arrange Composition</h3>
-            <span class="text-sm text-slate-400">25 min</span>
-          </div>
-          <p class="text-lg">Use paper shapes to create a clear visual message. Focus on contrast and alignment.</p>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
-          <h3 class="text-xl font-bold text-red-300 mb-2">Exit Ticket</h3>
-          <p class="text-lg">Name one choice you made on purpose.</p>
-        </div>
-      </div>
-
-      <!-- Thursday Content -->
-      <div id="day-thursday" class="day-content hidden max-w-4xl">
-        <div class="bg-slate-800 rounded-xl p-8 mb-6 border border-blue-500/30">
-          <h2 class="text-3xl font-bold mb-2">Tools, Process, and Studio Habits</h2>
-          <p class="text-xl text-blue-300 mb-4">Working with Intention</p>
-          <div class="bg-blue-900/30 rounded-lg p-4 border border-blue-500/30">
-            <p class="font-semibold text-blue-300 mb-2">Today's Brief:</p>
-            <p class="text-lg">Designers use tools carefully and work with intention. Today is about setup, process, and expectations.</p>
-          </div>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-yellow-300">Bell Ringer</h3>
-            <span class="text-sm text-slate-400">5 min</span>
-          </div>
-          <p class="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 text-lg">
-            What makes a workspace productive?
-          </p>
-        </div>
-
-        <div class="bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-xl p-6 mb-6 border border-green-500/30">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-green-300">Activity: Process Map</h3>
-            <span class="text-sm text-slate-400">25 min</span>
-          </div>
-          <p class="text-lg">Students create a simple visual map of the design process. Pair-share explanations.</p>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
-          <h3 class="text-xl font-bold text-red-300 mb-2">Exit Ticket</h3>
-          <p class="text-lg">One habit you'll practice this semester.</p>
-        </div>
-      </div>
-
-      <!-- Friday Content -->
-      <div id="day-friday" class="day-content hidden max-w-4xl">
-        <div class="bg-slate-800 rounded-xl p-8 mb-6 border border-blue-500/30">
-          <h2 class="text-3xl font-bold mb-2">Intro Design Challenge & Reflection</h2>
-          <p class="text-xl text-blue-300 mb-4">Applying What You've Learned</p>
-          <div class="bg-blue-900/30 rounded-lg p-4 border border-blue-500/30">
-            <p class="font-semibold text-blue-300 mb-2">Today's Brief:</p>
-            <p class="text-lg">You'll apply what you learned this week in a small design challenge and reflect on your thinking.</p>
-          </div>
-        </div>
-
-        <div class="bg-slate-800 rounded-xl p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-yellow-300">Bell Ringer</h3>
-            <span class="text-sm text-slate-400">5 min</span>
-          </div>
-          <p class="bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 text-lg">
-            What do you understand better now than on Monday?
-          </p>
-        </div>
-
-        <div class="bg-gradient-to-r from-green-900/30 to-blue-900/30 rounded-xl p-6 mb-6 border border-green-500/30">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-green-300">Activity: Personal Symbol Design</h3>
-            <span class="text-sm text-slate-400">35 min</span>
-          </div>
-          <p class="text-lg mb-4">Prompt: Create a simple symbol that represents you using only shapes. Sketch ideas. Choose one and refine. Focus on clarity and intention.</p>
-          <div class="bg-blue-900/30 p-4 rounded">
-            <p class="font-semibold mb-2">Reflection Questions:</p>
-            <ul class="space-y-1">
-              <li>• What worked?</li>
-              <li>• What was challenging?</li>
-              <li>• What would you improve?</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="bg-red-900/20 rounded-xl p-6 border border-red-500/30">
-          <h3 class="text-xl font-bold text-red-300 mb-2">Exit Ticket</h3>
-          <p class="text-lg">Turn in symbol and reflection.</p>
-        </div>
-      </div>
+<div class="container">
+  <!-- Welcome Screen -->
+  <div id="welcome">
+    <h1>Graphic Design 1</h1>
+    <p class="subtitle">Mr. Burke's Design Studio</p>
+    <p class="tagline">18-Week Journey into Visual Communication</p>
+    
+    <div class="welcome-box">
+      <h2>Welcome! What's your name?</h2>
+      <input type="text" id="nameInput" placeholder="Enter your name">
+      <button onclick="startLearning()">Start Learning</button>
     </div>
   </div>
 
-  <script>
-    let studentName = '';
+  <!-- Main Content -->
+  <div id="mainContent" class="hidden">
+    <button class="back-btn" onclick="goBack()">← Back to Home</button>
+    <h1 class="week-title">Week 1: Foundations, Tools, and Visual Thinking</h1>
+    <p class="week-desc">What graphic design is, how designers think, and how to begin working responsibly</p>
+    
+    <div class="day-buttons">
+      <button class="day-btn active" onclick="showDay('monday')">Monday</button>
+      <button class="day-btn" onclick="showDay('tuesday')">Tuesday</button>
+      <button class="day-btn" onclick="showDay('wednesday')">Wednesday</button>
+      <button class="day-btn" onclick="showDay('thursday')">Thursday</button>
+      <button class="day-btn" onclick="showDay('friday')">Friday</button>
+    </div>
 
-    function startLearning() {
-      const nameInput = document.getElementById('student-name');
-      studentName = nameInput.value.trim();
-      
-      if (studentName) {
-        document.getElementById('welcome-screen').classList.add('hidden');
-        document.getElementById('main-content').classList.remove('hidden');
-        showDay('monday');
-      }
-    }
+    <!-- MONDAY -->
+    <div id="monday" class="day-content">
+      <div class="card">
+        <h2>Welcome & What Is Graphic Design?</h2>
+        <p class="card-subtitle">Introduction to Visual Communication</p>
+        <div class="brief-box">
+          <div class="brief-label">Today's Brief:</div>
+          <p>Today you'll learn what graphic design is and why it matters. You'll look at everyday designs, discuss what they communicate, and start thinking like a designer.</p>
+        </div>
+      </div>
 
-    function showWelcome() {
-      document.getElementById('main-content').classList.add('hidden');
-      document.getElementById('welcome-screen').classList.remove('hidden');
-    }
+      <div class="card">
+        <h3>Learning Objectives</h3>
+        <ul class="objectives">
+          <li>Define graphic design in practical terms</li>
+          <li>Identify design in everyday life</li>
+          <li>Practice respectful discussion and critique</li>
+        </ul>
+      </div>
 
-    function showDay(day) {
-      // Hide all day content
-      const allDays = document.querySelectorAll('.day-content');
-      allDays.forEach(d => d.classList.add('hidden'));
-      
-      // Reset all buttons
-      const allBtns = document.querySelectorAll('.day-btn');
-      allBtns.forEach(btn => {
-        btn.classList.remove('bg-blue-600');
-        btn.classList.add('bg-slate-800');
-      });
-      
-      // Show selected day
-      document.getElementById('day-' + day).classList.remove('hidden');
-      document.getElementById('btn-' + day).classList.remove('bg-slate-800');
-      document.getElementById('btn-' + day).classList.add('bg-blue-600');
-    }
+      <div class="card">
+        <h3>Bell Ringer <span class="time">5 min</span></h3>
+        <div class="bell-ringer">
+          Write down three designs you saw this morning. What were they trying to do?
+        </div>
+      </div>
 
-    // Allow enter key to submit name
-    document.getElementById('student-name').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') startLearning();
-    });
-  </script>
+      <div class="card">
+        <h3>Mini Lesson <span class="time">15 min</span></h3>
+        <ul class="topics">
+          <li>What graphic design is (and isn't)</li>
+          <li>Design as communication and problem-solving</li>
+          <li>Examples: posters, apps, packaging, signage</li>
+        </ul>
+      </div>
+
+      <div class="card activity">
+        <h3>Activity: Design Spotting <span class="time">20 min</span></h3>
+        <p>Students list or sketch examples from the room or memory. Small-group discussion: purpose, audience, effectiveness.</p>
+      </div>
+
+      <div class="card exit-ticket">
+        <h3>Exit Ticket</h3>
+        <p>In one sentence, explain what graphic design does.</p>
+      </div>
+    </div>
+
+    <!-- TUESDAY -->
+    <div id="tuesday" class="day-content hidden">
+      <div class="card">
+        <h2>Visual Language & Observation</h2>
+        <p class="card-subtitle">Training Your Designer's Eye</p>
+        <div class="brief-box">
+          <div class="brief-label">Today's Brief:</div>
+          <p>Designers notice details. Today you'll train your eye to observe shapes, spacing, and relationships.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Bell Ringer <span class="time">5 min</span></h3>
+        <div class="bell-ringer">
+          Look at one object near you. List five visual details without naming the object.
+        </div>
+      </div>
+
+      <div class="card activity">
+        <h3>Activity: Blind Contour + Object Study <span class="time">25 min</span></h3>
+        <p>Blind contour drawing (no looking at paper). Second drawing with careful observation. Brief comparison and discussion.</p>
+      </div>
+
+      <div class="card exit-ticket">
+        <h3>Exit Ticket</h3>
+        <p>One thing you noticed today that you usually ignore.</p>
+      </div>
+    </div>
+
+    <!-- WEDNESDAY -->
+    <div id="wednesday" class="day-content hidden">
+      <div class="card">
+        <h2>Composition Basics</h2>
+        <p class="card-subtitle">How Arrangement Creates Meaning</p>
+        <div class="brief-box">
+          <div class="brief-label">Today's Brief:</div>
+          <p>How things are arranged matters. Today you'll learn simple rules that help designs feel clear and intentional.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Bell Ringer <span class="time">5 min</span></h3>
+        <div class="bell-ringer">
+          Which is easier to read: a messy page or an organized one? Why?
+        </div>
+      </div>
+
+      <div class="card activity">
+        <h3>Activity: Cut-and-Arrange Composition <span class="time">25 min</span></h3>
+        <p>Use paper shapes to create a clear visual message. Focus on contrast and alignment.</p>
+      </div>
+
+      <div class="card exit-ticket">
+        <h3>Exit Ticket</h3>
+        <p>Name one choice you made on purpose.</p>
+      </div>
+    </div>
+
+    <!-- THURSDAY -->
+    <div id="thursday" class="day-content hidden">
+      <div class="card">
+        <h2>Tools, Process, and Studio Habits</h2>
+        <p class="card-subtitle">Working with Intention</p>
+        <div class="brief-box">
+          <div class="brief-label">Today's Brief:</div>
+          <p>Designers use tools carefully and work with intention. Today is about setup, process, and expectations.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Bell Ringer <span class="time">5 min</span></h3>
+        <div class="bell-ringer">
+          What makes a workspace productive?
+        </div>
+      </div>
+
+      <div class="card activity">
+        <h3>Activity: Process Map <span class="time">25 min</span></h3>
+        <p>Students create a simple visual map of the design process. Pair-share explanations.</p>
+      </div>
+
+      <div class="card exit-ticket">
+        <h3>Exit Ticket</h3>
+        <p>One habit you'll practice this semester.</p>
+      </div>
+    </div>
+
+    <!-- FRIDAY -->
+    <div id="friday" class="day-content hidden">
+      <div class="card">
+        <h2>Intro Design Challenge & Reflection</h2>
+        <p class="card-subtitle">Applying What You've Learned</p>
+        <div class="brief-box">
+          <div class="brief-label">Today's Brief:</div>
+          <p>You'll apply what you learned this week in a small design challenge and reflect on your thinking.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Bell Ringer <span class="time">5 min</span></h3>
+        <div class="bell-ringer">
+          What do you understand better now than on Monday?
+        </div>
+      </div>
+
+      <div class="card activity">
+        <h3>Activity: Personal Symbol Design <span class="time">35 min</span></h3>
+        <p>Prompt: Create a simple symbol that represents you using only shapes. Sketch ideas. Choose one and refine. Focus on clarity and intention.</p>
+        <div style="margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem;">
+          <strong>Reflection Questions:</strong>
+          <ul style="margin-top: 0.5rem;">
+            <li>What worked?</li>
+            <li>What was challenging?</li>
+            <li>What would you improve?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card exit-ticket">
+        <h3>Exit Ticket</h3>
+        <p>Turn in symbol and reflection.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function startLearning() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (name) {
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('mainContent').classList.remove('hidden');
+  }
+}
+
+function goBack() {
+  document.getElementById('mainContent').classList.add('hidden');
+  document.getElementById('welcome').classList.remove('hidden');
+}
+
+function showDay(day) {
+  // Hide all days
+  document.querySelectorAll('.day-content').forEach(d => d.classList.add('hidden'));
+  
+  // Remove active from all buttons
+  document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+  
+  // Show selected day
+  document.getElementById(day).classList.remove('hidden');
+  
+  // Highlight button
+  event.target.classList.add('active');
+}
+
+// Enter key to start
+document.getElementById('nameInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') startLearning();
+});
+</script>
 
 </body>
 </html>
