@@ -54,6 +54,45 @@
     }
     button:hover { background: #2563eb; }
     
+    /* Week Selection */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .week-card {
+      background: #1e293b;
+      border: 2px solid #475569;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .week-card:hover {
+      border-color: #3b82f6;
+      transform: scale(1.05);
+    }
+    .week-card.active {
+      border-color: #3b82f6;
+      background: #1e3a8a;
+    }
+    .week-number {
+      display: inline-block;
+      width: 3rem;
+      height: 3rem;
+      background: #3b82f6;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .week-title-card { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
+    .week-desc { font-size: 0.9rem; color: #94a3b8; }
+    
     /* Main Content */
     .back-btn {
       width: auto;
@@ -62,7 +101,7 @@
       margin-bottom: 1rem;
     }
     .week-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .week-desc { font-size: 1.3rem; color: #93c5fd; margin-bottom: 2rem; }
+    .week-description { font-size: 1.3rem; color: #93c5fd; margin-bottom: 2rem; }
     
     /* Day Buttons */
     .day-buttons {
@@ -108,7 +147,7 @@
       line-height: 1.6;
     }
     
-    .bell-ringer {
+    .bell-ringer, .script-box {
       background: rgba(234, 179, 8, 0.1);
       border-left: 4px solid #eab308;
       padding: 1rem;
@@ -130,6 +169,23 @@
       font-size: 0.9rem; 
       color: #94a3b8; 
     }
+
+    .law-box {
+      background: rgba(139, 92, 246, 0.1);
+      border: 2px solid rgba(139, 92, 246, 0.3);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .student-greeting {
+      background: #1e293b;
+      border: 2px solid #475569;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -148,219 +204,393 @@
     </div>
   </div>
 
+  <!-- Week Selection -->
+  <div id="weekSelection" class="hidden">
+    <div class="student-greeting">
+      <h2>Welcome back, <span id="studentNameDisplay"></span>! 👋</h2>
+      <p style="color: #94a3b8; margin-top: 0.5rem;">Ready to think like a designer?</p>
+    </div>
+
+    <h2 style="margin-bottom: 1rem;">Select a Week:</h2>
+    <div class="week-grid">
+      <div class="week-card" onclick="selectWeek(1)">
+        <div class="week-number">1</div>
+        <div class="week-title-card">Foundations, Tools, and Visual Thinking</div>
+        <div class="week-desc">What graphic design is and how designers think</div>
+      </div>
+
+      <div class="week-card" onclick="selectWeek(2)">
+        <div class="week-number">2</div>
+        <div class="week-title-card">The Laws of C.R.A.P.</div>
+        <div class="week-desc">Contrast, Repetition, Alignment, Proximity</div>
+      </div>
+
+      <div class="week-card" style="opacity: 0.5;">
+        <div class="week-number">3</div>
+        <div class="week-title-card">Week 3</div>
+        <div class="week-desc">Coming Soon</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Main Content -->
   <div id="mainContent" class="hidden">
-    <button class="back-btn" onclick="goBack()">← Back to Home</button>
-    <h1 class="week-title">Week 1: Foundations, Tools, and Visual Thinking</h1>
-    <p class="week-desc">What graphic design is, how designers think, and how to begin working responsibly</p>
+    <button class="back-btn" onclick="goToWeekSelection()">← Back to Weeks</button>
+    <h1 class="week-title" id="weekTitle"></h1>
+    <p class="week-description" id="weekDesc"></p>
     
-    <div class="day-buttons">
-      <button class="day-btn active" onclick="showDay('monday')">Monday</button>
-      <button class="day-btn" onclick="showDay('tuesday')">Tuesday</button>
-      <button class="day-btn" onclick="showDay('wednesday')">Wednesday</button>
-      <button class="day-btn" onclick="showDay('thursday')">Thursday</button>
-      <button class="day-btn" onclick="showDay('friday')">Friday</button>
-    </div>
-
-    <!-- MONDAY -->
-    <div id="monday" class="day-content">
-      <div class="card">
-        <h2>Welcome & What Is Graphic Design?</h2>
-        <p class="card-subtitle">Introduction to Visual Communication</p>
-        <div class="brief-box">
-          <div class="brief-label">Today's Brief:</div>
-          <p>Today you'll learn what graphic design is and why it matters. You'll look at everyday designs, discuss what they communicate, and start thinking like a designer.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Learning Objectives</h3>
-        <ul class="objectives">
-          <li>Define graphic design in practical terms</li>
-          <li>Identify design in everyday life</li>
-          <li>Practice respectful discussion and critique</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Bell Ringer <span class="time">5 min</span></h3>
-        <div class="bell-ringer">
-          Write down three designs you saw this morning. What were they trying to do?
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Mini Lesson <span class="time">15 min</span></h3>
-        <ul class="topics">
-          <li>What graphic design is (and isn't)</li>
-          <li>Design as communication and problem-solving</li>
-          <li>Examples: posters, apps, packaging, signage</li>
-        </ul>
-      </div>
-
-      <div class="card activity">
-        <h3>Activity: Design Spotting <span class="time">20 min</span></h3>
-        <p>Students list or sketch examples from the room or memory. Small-group discussion: purpose, audience, effectiveness.</p>
-      </div>
-
-      <div class="card exit-ticket">
-        <h3>Exit Ticket</h3>
-        <p>In one sentence, explain what graphic design does.</p>
-      </div>
-    </div>
-
-    <!-- TUESDAY -->
-    <div id="tuesday" class="day-content hidden">
-      <div class="card">
-        <h2>Visual Language & Observation</h2>
-        <p class="card-subtitle">Training Your Designer's Eye</p>
-        <div class="brief-box">
-          <div class="brief-label">Today's Brief:</div>
-          <p>Designers notice details. Today you'll train your eye to observe shapes, spacing, and relationships.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Bell Ringer <span class="time">5 min</span></h3>
-        <div class="bell-ringer">
-          Look at one object near you. List five visual details without naming the object.
-        </div>
-      </div>
-
-      <div class="card activity">
-        <h3>Activity: Blind Contour + Object Study <span class="time">25 min</span></h3>
-        <p>Blind contour drawing (no looking at paper). Second drawing with careful observation. Brief comparison and discussion.</p>
-      </div>
-
-      <div class="card exit-ticket">
-        <h3>Exit Ticket</h3>
-        <p>One thing you noticed today that you usually ignore.</p>
-      </div>
-    </div>
-
-    <!-- WEDNESDAY -->
-    <div id="wednesday" class="day-content hidden">
-      <div class="card">
-        <h2>Composition Basics</h2>
-        <p class="card-subtitle">How Arrangement Creates Meaning</p>
-        <div class="brief-box">
-          <div class="brief-label">Today's Brief:</div>
-          <p>How things are arranged matters. Today you'll learn simple rules that help designs feel clear and intentional.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Bell Ringer <span class="time">5 min</span></h3>
-        <div class="bell-ringer">
-          Which is easier to read: a messy page or an organized one? Why?
-        </div>
-      </div>
-
-      <div class="card activity">
-        <h3>Activity: Cut-and-Arrange Composition <span class="time">25 min</span></h3>
-        <p>Use paper shapes to create a clear visual message. Focus on contrast and alignment.</p>
-      </div>
-
-      <div class="card exit-ticket">
-        <h3>Exit Ticket</h3>
-        <p>Name one choice you made on purpose.</p>
-      </div>
-    </div>
-
-    <!-- THURSDAY -->
-    <div id="thursday" class="day-content hidden">
-      <div class="card">
-        <h2>Tools, Process, and Studio Habits</h2>
-        <p class="card-subtitle">Working with Intention</p>
-        <div class="brief-box">
-          <div class="brief-label">Today's Brief:</div>
-          <p>Designers use tools carefully and work with intention. Today is about setup, process, and expectations.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Bell Ringer <span class="time">5 min</span></h3>
-        <div class="bell-ringer">
-          What makes a workspace productive?
-        </div>
-      </div>
-
-      <div class="card activity">
-        <h3>Activity: Process Map <span class="time">25 min</span></h3>
-        <p>Students create a simple visual map of the design process. Pair-share explanations.</p>
-      </div>
-
-      <div class="card exit-ticket">
-        <h3>Exit Ticket</h3>
-        <p>One habit you'll practice this semester.</p>
-      </div>
-    </div>
-
-    <!-- FRIDAY -->
-    <div id="friday" class="day-content hidden">
-      <div class="card">
-        <h2>Intro Design Challenge & Reflection</h2>
-        <p class="card-subtitle">Applying What You've Learned</p>
-        <div class="brief-box">
-          <div class="brief-label">Today's Brief:</div>
-          <p>You'll apply what you learned this week in a small design challenge and reflect on your thinking.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Bell Ringer <span class="time">5 min</span></h3>
-        <div class="bell-ringer">
-          What do you understand better now than on Monday?
-        </div>
-      </div>
-
-      <div class="card activity">
-        <h3>Activity: Personal Symbol Design <span class="time">35 min</span></h3>
-        <p>Prompt: Create a simple symbol that represents you using only shapes. Sketch ideas. Choose one and refine. Focus on clarity and intention.</p>
-        <div style="margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem;">
-          <strong>Reflection Questions:</strong>
-          <ul style="margin-top: 0.5rem;">
-            <li>What worked?</li>
-            <li>What was challenging?</li>
-            <li>What would you improve?</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card exit-ticket">
-        <h3>Exit Ticket</h3>
-        <p>Turn in symbol and reflection.</p>
-      </div>
-    </div>
+    <div class="day-buttons" id="dayButtons"></div>
+    <div id="dayContent"></div>
   </div>
 </div>
 
 <script>
+let studentName = '';
+let currentWeek = 1;
+let currentDay = 'monday';
+
+const weekData = {
+  1: {
+    title: "Week 1: Foundations, Tools, and Visual Thinking",
+    description: "What graphic design is, how designers think, and how to begin working responsibly",
+    days: {
+      monday: {
+        title: "Welcome & What Is Graphic Design?",
+        subtitle: "Introduction to Visual Communication",
+        brief: "Today you'll learn what graphic design is and why it matters. You'll look at everyday designs, discuss what they communicate, and start thinking like a designer.",
+        objectives: [
+          "Define graphic design in practical terms",
+          "Identify design in everyday life",
+          "Practice respectful discussion and critique"
+        ],
+        bellRinger: {
+          time: "5 min",
+          prompt: "Write down three designs you saw this morning. What were they trying to do?"
+        },
+        miniLesson: {
+          time: "15 min",
+          topics: [
+            "What graphic design is (and isn't)",
+            "Design as communication and problem-solving",
+            "Examples: posters, apps, packaging, signage"
+          ]
+        },
+        activity: {
+          title: "Design Spotting",
+          time: "20 min",
+          description: "Students list or sketch examples from the room or memory. Small-group discussion: purpose, audience, effectiveness."
+        },
+        exitTicket: "In one sentence, explain what graphic design does.",
+        materials: ["Whiteboard", "Markers", "Paper or sketchbooks"]
+      },
+      tuesday: {
+        title: "Visual Language & Observation",
+        subtitle: "Training Your Designer's Eye",
+        brief: "Designers notice details. Today you'll train your eye to observe shapes, spacing, and relationships.",
+        bellRinger: {
+          time: "5 min",
+          prompt: "Look at one object near you. List five visual details without naming the object."
+        },
+        activity: {
+          title: "Blind Contour + Object Study",
+          time: "25 min",
+          description: "Blind contour drawing (no looking at paper). Second drawing with careful observation. Brief comparison and discussion."
+        },
+        exitTicket: "One thing you noticed today that you usually ignore.",
+        materials: ["Paper", "Pencils", "Everyday objects"]
+      },
+      wednesday: {
+        title: "Composition Basics",
+        subtitle: "How Arrangement Creates Meaning",
+        brief: "How things are arranged matters. Today you'll learn simple rules that help designs feel clear and intentional.",
+        bellRinger: {
+          time: "5 min",
+          prompt: "Which is easier to read: a messy page or an organized one? Why?"
+        },
+        activity: {
+          title: "Cut-and-Arrange Composition",
+          time: "25 min",
+          description: "Use paper shapes to create a clear visual message. Focus on contrast and alignment."
+        },
+        exitTicket: "Name one choice you made on purpose.",
+        materials: ["Scrap paper", "Scissors", "Glue"]
+      },
+      thursday: {
+        title: "Tools, Process, and Studio Habits",
+        subtitle: "Working with Intention",
+        brief: "Designers use tools carefully and work with intention. Today is about setup, process, and expectations.",
+        bellRinger: {
+          time: "5 min",
+          prompt: "What makes a workspace productive?"
+        },
+        activity: {
+          title: "Process Map",
+          time: "25 min",
+          description: "Students create a simple visual map of the design process. Pair-share explanations."
+        },
+        exitTicket: "One habit you'll practice this semester.",
+        materials: ["Paper", "Markers"]
+      },
+      friday: {
+        title: "Intro Design Challenge & Reflection",
+        subtitle: "Applying What You've Learned",
+        brief: "You'll apply what you learned this week in a small design challenge and reflect on your thinking.",
+        bellRinger: {
+          time: "5 min",
+          prompt: "What do you understand better now than on Monday?"
+        },
+        activity: {
+          title: "Personal Symbol Design",
+          time: "35 min",
+          description: "Prompt: Create a simple symbol that represents you using only shapes. Sketch ideas. Choose one and refine. Focus on clarity and intention.",
+          reflection: ["What worked?", "What was challenging?", "What would you improve?"]
+        },
+        exitTicket: "Turn in symbol and reflection.",
+        materials: ["Paper", "Pencils/markers"]
+      }
+    }
+  },
+  2: {
+    title: "Week 2: The Laws of C.R.A.P.",
+    description: "Contrast, Repetition, Alignment, Proximity - The non-negotiable laws of design",
+    days: {
+      monday: {
+        title: "The Laws of C.R.A.P. (Part 1: Contrast)",
+        subtitle: "Making Elements Stand Out",
+        brief: "Without contrast, you have nothing. If everything is bold, nothing is bold. Contrast is how you tell the viewer's eye exactly where to look first.",
+        script: {
+          time: "2 min",
+          content: "Welcome to Week 2. Last week, we defined what design is. This week, we learn the rules of how it works. There is an acronym you will never forget. It's called C.R.A.P. - Contrast, Repetition, Alignment, Proximity. These are not suggestions. These are the laws of physics for a designer. If your poster looks bad, it is 100% because you broke one of these four laws. Today we start with Contrast."
+        },
+        laws: [
+          { name: "Contrast", description: "If two things are different, make them VERY different. Use size, weight, color, or shape." },
+          { name: "Repetition", description: "Coming Tuesday" },
+          { name: "Alignment", description: "Coming Wednesday" },
+          { name: "Proximity", description: "Coming Thursday" }
+        ],
+        activity: {
+          title: "The 'Boring Flyer' Fix",
+          time: "40 min",
+          description: "Redesign a boring 'Lost Dog' flyer using extreme contrast. Word 'LOST DOG' must be massive. Phone number must be bold. Details must be small."
+        },
+        exitTicket: "Which element catches your eye first in your redesign? Why?",
+        materials: ["Bad flyer handout", "Blank paper", "Black Sharpies"]
+      },
+      tuesday: {
+        title: "The Laws of C.R.A.P. (Part 2: Repetition)",
+        subtitle: "Creating Unity and Professionalism",
+        brief: "Design falls apart when everything is random. Repetition is how you prove control. When something is important, you repeat it.",
+        script: {
+          time: "2 min",
+          content: "Design falls apart when everything is random. Random fonts. Random sizes. Random spacing. Repetition is how you prove control. When something is important, you repeat it. When something belongs together, you repeat how it looks. Professionals repeat on purpose. Amateurs decorate."
+        },
+        activity: {
+          title: "The 'Style Lock' Challenge",
+          time: "40 min",
+          description: "Redesign a flyer with mismatched fonts. Choose ONE headline style and repeat it. Choose ONE body text style and repeat it. Any shapes must repeat at least twice. No new styles allowed after first 5 minutes."
+        },
+        exitTicket: "What did you repeat on purpose in your design?",
+        materials: ["Bad style flyer", "Blank paper", "Sharpies"]
+      },
+      wednesday: {
+        title: "The Laws of C.R.A.P. (Part 3: Alignment)",
+        subtitle: "The Invisible Grid",
+        brief: "Nothing should be placed on the page arbitrarily. Every element must have a visual connection to something else.",
+        script: {
+          time: "2 min",
+          content: "The Third Law is Alignment. This is where amateurs reveal themselves. Amateurs center everything because it is safe. Designers use The Grid. Every item on your page should have a visual connection to something else. Strong alignment creates a clean, sophisticated look. Today, we clean your room."
+        },
+        activity: {
+          title: "The Cut & Paste",
+          time: "40 min",
+          description: "Cut out pre-printed text blocks and photos. Glue them onto blank sheet, but draw alignment lines in pencil first. Every edge must align with another edge. NO CENTER ALIGNMENT allowed."
+        },
+        exitTicket: "How many alignment lines did you use?",
+        materials: ["Pre-printed elements sheet", "Scissors", "Glue", "Rulers", "Pencils"]
+      },
+      thursday: {
+        title: "The Laws of C.R.A.P. (Part 4: Proximity)",
+        subtitle: "Grouping Related Information",
+        brief: "Physical closeness implies relationship. Things that are related must be grouped together. Don't make the viewer hunt for information.",
+        script: {
+          time: "2 min",
+          content: "The Final Law is Proximity. Imagine you are at a party. You see two people standing close together, whispering. You assume they know each other. Design is the same. Things that are related must be grouped together. If your phone number is far away from your email, you are confusing the viewer. Group it."
+        },
+        activity: {
+          title: "The Menu Fix",
+          time: "40 min",
+          description: "Sketch a menu layout with 15 scrambled items. Group into 3 zones: Identity (name/address), Food (burgers/fries), Drinks (soda/shakes). Use whitespace to separate zones."
+        },
+        exitTicket: "How many distinct groups did you create?",
+        materials: ["Sketchbooks", "Pencils"]
+      },
+      friday: {
+        title: "The C.R.A.P. Audit (Review)",
+        subtitle: "Diagnosing and Fixing Design",
+        brief: "Today, you are the doctor. Diagnose a terrible flyer using the four laws, then perform surgery to save it.",
+        script: {
+          time: "2 min",
+          content: "We have learned the four laws. Contrast, Repetition, Alignment, Proximity. Together, they form C.R.A.P. Today, you are the doctor. I am going to give you a sick patient—a truly terrible flyer. Your job is to diagnose it using the laws, and then perform surgery to save it. You are not drawing pretty pictures. You are organizing information."
+        },
+        activity: {
+          title: "Disaster Flyer Diagnosis & Fix",
+          time: "45 min",
+          description: "Take a red pen. Circle errors and label them (Bad P, Weak C, etc.). Then sketch the fixed version on the back. Must exhibit: High contrast headlines, left alignment, grouped info, repeated fonts."
+        },
+        exitTicket: "Turn in audited flyer and redesign.",
+        materials: ["Disaster flyer handout", "Red pens", "Pencils"]
+      }
+    }
+  }
+};
+
 function startLearning() {
   const name = document.getElementById('nameInput').value.trim();
   if (name) {
+    studentName = name;
+    document.getElementById('studentNameDisplay').textContent = name;
     document.getElementById('welcome').classList.add('hidden');
-    document.getElementById('mainContent').classList.remove('hidden');
+    document.getElementById('weekSelection').classList.remove('hidden');
   }
 }
 
-function goBack() {
+function selectWeek(weekNum) {
+  currentWeek = weekNum;
+  document.getElementById('weekSelection').classList.add('hidden');
+  document.getElementById('mainContent').classList.remove('hidden');
+  
+  const week = weekData[weekNum];
+  document.getElementById('weekTitle').textContent = week.title;
+  document.getElementById('weekDesc').textContent = week.description;
+  
+  loadDayButtons();
+  showDay('monday');
+}
+
+function goToWeekSelection() {
   document.getElementById('mainContent').classList.add('hidden');
-  document.getElementById('welcome').classList.remove('hidden');
+  document.getElementById('weekSelection').classList.remove('hidden');
+}
+
+function loadDayButtons() {
+  const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+  const dayLabels = { monday: 'Monday', tuesday: 'Tuesday', wednesday: 'Wednesday', thursday: 'Thursday', friday: 'Friday' };
+  
+  const buttonsHTML = days.map(day => 
+    `<button class="day-btn" onclick="showDay('${day}')" id="btn-${day}">${dayLabels[day]}</button>`
+  ).join('');
+  
+  document.getElementById('dayButtons').innerHTML = buttonsHTML;
 }
 
 function showDay(day) {
-  // Hide all days
-  document.querySelectorAll('.day-content').forEach(d => d.classList.add('hidden'));
+  currentDay = day;
+  const dayData = weekData[currentWeek].days[day];
   
-  // Remove active from all buttons
+  // Update button states
   document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(`btn-${day}`).classList.add('active');
   
-  // Show selected day
-  document.getElementById(day).classList.remove('hidden');
-  
-  // Highlight button
-  event.target.classList.add('active');
+  // Build content
+  let html = `
+    <div class="card">
+      <h2>${dayData.title}</h2>
+      <p class="card-subtitle">${dayData.subtitle}</p>
+      <div class="brief-box">
+        <div class="brief-label">Today's Brief:</div>
+        <p>${dayData.brief}</p>
+      </div>
+    </div>
+  `;
+
+  if (dayData.objectives) {
+    html += `
+      <div class="card">
+        <h3>Learning Objectives</h3>
+        <ul class="objectives">
+          ${dayData.objectives.map(obj => `<li>${obj}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  if (dayData.script) {
+    html += `
+      <div class="card">
+        <h3>Teacher Script <span class="time">${dayData.script.time}</span></h3>
+        <div class="script-box">${dayData.script.content}</div>
+      </div>
+    `;
+  }
+
+  if (dayData.laws) {
+    html += `<div class="card"><h3>The C.R.A.P. Laws</h3>`;
+    dayData.laws.forEach(law => {
+      html += `
+        <div class="law-box">
+          <strong>${law.name}:</strong> ${law.description}
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  if (dayData.bellRinger) {
+    html += `
+      <div class="card">
+        <h3>Bell Ringer <span class="time">${dayData.bellRinger.time}</span></h3>
+        <div class="bell-ringer">${dayData.bellRinger.prompt}</div>
+      </div>
+    `;
+  }
+
+  if (dayData.miniLesson) {
+    html += `
+      <div class="card">
+        <h3>Mini Lesson <span class="time">${dayData.miniLesson.time}</span></h3>
+        <ul class="topics">
+          ${dayData.miniLesson.topics.map(topic => `<li>${topic}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  if (dayData.activity) {
+    html += `
+      <div class="card activity">
+        <h3>Activity: ${dayData.activity.title} <span class="time">${dayData.activity.time}</span></h3>
+        <p>${dayData.activity.description}</p>
+        ${dayData.activity.reflection ? `
+          <div style="margin-top: 1rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem;">
+            <strong>Reflection Questions:</strong>
+            <ul style="margin-top: 0.5rem;">
+              ${dayData.activity.reflection.map(q => `<li>${q}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  if (dayData.exitTicket) {
+    html += `
+      <div class="card exit-ticket">
+        <h3>Exit Ticket</h3>
+        <p>${dayData.exitTicket}</p>
+      </div>
+    `;
+  }
+
+  if (dayData.materials) {
+    html += `
+      <div class="card">
+        <h3>Materials Needed</h3>
+        <p>${dayData.materials.join(', ')}</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('dayContent').innerHTML = html;
 }
 
 // Enter key to start
